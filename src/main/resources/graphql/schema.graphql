@@ -1,0 +1,54 @@
+# This is the type of the user
+type Users{
+    id: ID!
+    username: String!
+    password: String!
+    email: String!
+    roles: [Roles]!
+}
+
+# This is the type of the role
+type Roles{
+    id: ID!
+    name: String!
+    description: String!
+}
+
+# This is the input type of the user
+input userInput{
+#    id: ID
+    username: String!
+    password: String!
+    email: String!
+}
+
+input roleInput{
+#    id: ID
+    name: String!
+    description: String!
+
+}
+
+type successResponse{
+    id: String!
+    message: String!
+    status: String!
+}
+
+# This is the mutation type which will be used to save data and update data and delete data etc
+type Mutation{
+    saveUser(user: userInput!): Users # This mutation will save user
+    updateUser(id: Int!, user: userInput!): Users # This mutation will update user
+    deleteUser(id: Int!): successResponse # This mutation will delete user
+    saveRole(role: roleInput!): Roles # This mutation will save role
+    updateRole(id: Int!, role: roleInput!): Roles # This mutation will update role
+    deleteRole(id: Int!): successResponse # This mutation will delete role
+}
+
+# This is the query type which will be used to fetch data
+type Query{
+    getAllUsers: [Users] # This query will return all [] is for array
+    getUserById(id:Int): Users # This query will return single user
+    getAllRoles: [Roles] # This query will return all roles
+    getRoleById(id:Int): Roles # This query will return single role
+}
