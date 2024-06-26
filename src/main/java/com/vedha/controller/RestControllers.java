@@ -2,6 +2,8 @@ package com.vedha.controller;
 
 import com.vedha.dto.RolesDTO;
 import com.vedha.dto.UsersDTO;
+import com.vedha.entity.Countries;
+import com.vedha.service.CountryService;
 import com.vedha.service.RolesService;
 import com.vedha.service.UsersService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,6 +28,8 @@ public class RestControllers {
     private final UsersService usersService;
 
     private final RolesService rolesService;
+
+    private final CountryService countryService;
 
     @Operation(summary = "Get all users", description = "Get all users")
     @ApiResponse(responseCode = "200", description = "HTTP Status 200 OK")
@@ -107,4 +111,11 @@ public class RestControllers {
         return ResponseEntity.ok(rolesService.getRoleById(id));
     }
 
+    @Operation(summary = "get country data by code", description = "get country data by code")
+    @ApiResponse(responseCode = "200", description = "HTTP Status 200 OK")
+    @GetMapping(value = "/getCountryByCode", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Countries> getCountryByCode(@RequestParam("countryCode") String countryCode) {
+
+        return ResponseEntity.ok(countryService.getCountryByCode(countryCode));
+    }
 }
